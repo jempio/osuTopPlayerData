@@ -1,1 +1,1 @@
-# osu-top-player-data
+# osuTopPlayerData
