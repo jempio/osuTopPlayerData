@@ -1,4 +1,4 @@
-rank,country_rank,player_name,country,accuracy,play_count,level,hours,performance_points,ranked_score,ss,s,a,watched_by,total_hits,device
+global_rank,country_rank,player_name,country,accuracy,play_count,level,hours,performance_points,ranked_score,ss,s,a,watched_by,total_hits,device
 1,1,Cookiezi,South Korea,98.86,15245,101,324,13450,22401473154,55,454,325,3057421,6372761,tablet
 2,2,Angelsim,South Korea,98.87,124726,103,1457,12950,35481061465,159,1369,679,498548,29845228,mouse
 3,1,Rafis,Poland,99.03,208066,103,2229,12942,36343320002,170,1654,785,1170973,35760655,tablet

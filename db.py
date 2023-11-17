@@ -1,18 +1,18 @@
 import mysql.connector
-from mysql.connector import ERROR
+from mysql.connector import Error
 
 create_osu_player_2017_table = """
 CREATE TABLE osu_2017_data(
-rank int, 
+global_rank int, 
 country_rank int,
 player_name varchar(255),
 country varchar(255),
-accuracy float,
+accuracy float(4),
 play_count int,
 level int,
 hours int,
 performance_points int,
-ranked_score int,
+ranked_score bigint,
 ss int,
 s int,
 a int,
@@ -24,10 +24,10 @@ device varchar(255)
 
 create_osu_player_2023_table = """
 CREATE TABLE osu_2023_data(
-global rank int, 
+global_rank int, 
 player_name varchar(255),
 country varchar(255),
-accuracy float,
+accuracy float(4),
 play_count int,
 performance_points int,
 ss int,
@@ -47,17 +47,17 @@ def create_connection_to_server(host, user, password):
             user = user, 
             password = password
         )
-        print("connection sucessful")
-    except ERROR as err:
+        print("Connection sucessful")
+    except Error as err:
         print(f"Error: {err}")
     return connection
 
 def create_database(connection, query):
-    cursor = connection.cusor()
+    cursor = connection.cursor()
     try:
         cursor.execute(query)
         print("Database created sucessfully")
-    except ERROR as err:
+    except Error as err:
         print(f"Error: {err}")
 
 
@@ -71,7 +71,7 @@ def create_connection_to_db(host, user, password, db):
             db = db
         )
         print("My SQL database connection sucessful")
-    except ERROR as err:
+    except Error as err:
         print(f"Error: {err}")
     return connection
 
@@ -83,10 +83,10 @@ def populate_2017_player_data(connection, data):
     cursor.execute(create_osu_player_2017_table)
     connection.commit()
     for _, row in data.iterrows():
-        sql = "INSERT INTO osu_player.osu_2017_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql = "INSERT INTO top_osu_player.osu_2017_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         try:
             cursor.execute(sql, tuple(row))
-        except ERROR as err:
+        except Error as err:
             print(f"Error: {err}")
         connection.commit()
 
@@ -99,10 +99,10 @@ def populate_2023_player_data(connection, data):
     cursor.execute(create_osu_player_2023_table)
     connection.commit()
     for _, row in data.iterrows():
-        sql = "INSERT INTO osu_player.osu_2023_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql = "INSERT INTO top_osu_player.osu_2023_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         try:
             cursor.execute(sql, tuple(row))
-        except ERROR as err:
+        except Error as err:
             print(f"Error: {err}")
         connection.commit()
 
