@@ -44,4 +44,4 @@ Results from the SQL queries were all put into panda dataframes and printed to c
 
 - Only one player has surpassed Garry Kasparob in peak ELO rating, Magnus Carlsen.
 
-**How many top players in 2023 have now surpassed the pp value of Cookiezi who was rank 1 in 2017**
+**How many top players in 2023 have now surpassed the pp value of Cookiezi who was rank 1 in 2017?**
