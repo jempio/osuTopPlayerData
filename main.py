@@ -7,9 +7,7 @@ def main():
     osu_2023_data = pd.read_csv('data/osu_2023_player_data.csv', index_col=False, delimiter=",")
     connection = database.create_connection_to_server("localhost", "jempio", pw)
     create_top_osu_player_db_query = "CREATE DATABASE top_osu_player"
-
     database.create_database(connection, create_top_osu_player_db_query)
-
     connection = database.create_connection_to_db("localhost", "jempio", pw, "top_osu_player")
     database.populate_2017_player_data(connection, osu_2017_data)
     database.populate_2023_player_data(connection, osu_2023_data)

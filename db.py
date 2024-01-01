@@ -35,7 +35,7 @@ s int,
 a int,
 level int,
 hours int,
-watched_by int,
+watched_by int
 );
 """
 
@@ -55,6 +55,7 @@ def create_connection_to_server(host, user, password):
 def create_database(connection, query):
     cursor = connection.cursor()
     try:
+        cursor.execute("DROP DATABASE IF EXISTS top_osu_player")
         cursor.execute(query)
         print("Database Created Successfully")
     except Error as err:
