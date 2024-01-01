@@ -3,7 +3,7 @@ osu! is a rhythmn game where the objective is to click circles to the beat of mu
 
 In this program I used the python library mysql.connector along with pandas to get relevant data from two datasets and answer the following questions:
 
-- What is the average pp value in the top 100 in each year?
+- What is the average pp value for the top 100 players in each year?
 - What is the average amount of playcount and hours played in each year?
 - How has the country distribution of top players changed from 2017 to 2023?
 - Which players in each year had the least amount of hours played and most amount of hours played and the respective rank of those players?

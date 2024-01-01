@@ -110,5 +110,5 @@ def populate_2023_player_data(connection, data):
 def results_query(connection, query):
     cursor = connection.cursor()
     cursor.execute(query)
-    result = cursor.fetchall
+    result = cursor.fetchall()
     return result
