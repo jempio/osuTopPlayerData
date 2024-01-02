@@ -2,6 +2,7 @@ import db as database
 import pandas as pd
 
 def main():
+    # hidden password
     pw = "-Chubbynuts7757"
     osu_2017_data = pd.read_csv('data/osu_2017_player_data.csv', index_col=False, delimiter=",")
     osu_2023_data = pd.read_csv('data/osu_2023_player_data.csv', index_col=False, delimiter=",")
@@ -71,7 +72,7 @@ def main():
     # Q3
     # Query for varying country representation in 2017
     country_query_2017 = """
-    SELECT country, COUNT(*) from osu_2017_data
+    SELECT country, COUNT(*) FROM osu_2017_data
     GROUP BY country
     ORDER BY COUNT(*) desc
     LIMIT 10;
@@ -81,14 +82,70 @@ def main():
 
     # Query for varying country representation in 2023
     country_query_2023 = """
-    SELECT country, COUNT(*) from osu_2023_data
+    SELECT country, COUNT(*) FROM osu_2023_data
     GROUP BY country
     ORDER BY COUNT(*) desc
     LIMIT 10;
     """
     country_results_2023 = database.results_query(connection, country_query_2023)
     pd_visualizer(country_results_2023, ["country", "number of players"])
+
+    # Q4
+    # Query for players with the highest and lowest hours played in 2017 w/ their ranks
+    # Player with most hours in 2017
+    most_hours_query_2017 = """
+    SELECT player_name, hours, global_rank 
+    FROM osu_2017_data
+    ORDER BY hours desc
+    LIMIT 1;
+    """
+    most_hours_result_2017 = database.results_query(connection, most_hours_query_2017)
+    pd_visualizer(most_hours_result_2017, ["player name", "hours played", "rank"])
+
+    # Player with least hours in 2017
+    least_hours_query_2017 = """
+    SELECT player_name, hours, global_rank 
+    FROM osu_2017_data
+    ORDER BY hours asc
+    LIMIT 1;
+    """
+    least_hours_result_2017 = database.results_query(connection, least_hours_query_2017)
+    pd_visualizer(least_hours_result_2017, ["player name", "hours played", "rank"])
+
+    # Query for players with the highest and lowest hours played in 2023 w/ their ranks
+    # Player with most hours in 2023
+    most_hours_query_2023 = """
+    SELECT player_name, hours, global_rank 
+    FROM osu_2023_data
+    ORDER BY hours desc
+    LIMIT 1;
+    """
+    most_hours_result_2023 = database.results_query(connection, most_hours_query_2023)
+    pd_visualizer(most_hours_result_2023, ["player name", "hours played", "rank"])
+
+    # Player with least hours in 2023
+    least_hours_query_2023 = """
+    SELECT player_name, hours, global_rank 
+    FROM osu_2023_data
+    ORDER BY hours asc
+    LIMIT 1;
+    """
+    least_hours_result_2023 = database.results_query(connection, least_hours_query_2023)
+    pd_visualizer(least_hours_result_2023, ["player name", "hours played", "rank"])
+
+    # Q5
+    # Query for players that are still in the top 100 in 2023 from 2017
+    remained_as_top_player_query = """
+    SELECT osu_2017_data.player_name    
+    FROM osu_2017_data
+    INNER JOIN osu_2023_data 
+        ON osu_2017_data.player_name = osu_2023_data.player_name;
+    """ 
+    top_player_results = database.results_query(connection, remained_as_top_player_query)
+    pd_visualizer(top_player_results, ["player name"])
+
     
+
     
 
 

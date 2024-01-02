@@ -8,7 +8,7 @@ In this program I used the python library mysql.connector along with pandas to g
 - How has the country distribution of top players changed from 2017 to 2023?
 - Which players in each year had the least amount of hours played and most amount of hours played and the respective rank of those players?
 - Which players in 2017 are still in the top 100 in 2023?
-- How many top players in 2023 have now surpassed the pp value of Cookiezi who was rank 1 in 2017
+- How many top players in 2023 have now surpassed the pp value of Cookiezi who was rank 1 in 2017?
 
 ## Data
 Two Data files were used in this project, credit is given below.
@@ -26,7 +26,7 @@ Results from the SQL queries were all put into panda dataframes and printed to c
 
 **What is the average pp value in the top 100 in each year?**
 
-- Russia ranks first, and the Soviet Union is high on the list as well before they became the Russian federation.
+- Russia ranks first, and the Soviet Union is high on the list as well before they became the Russian federation. 
 
 **What is the average amount of playcount and hours played in each year?**
 
@@ -43,5 +43,6 @@ Results from the SQL queries were all put into panda dataframes and printed to c
 **Which players in 2017 are still in the top 100 in 2023?**
 
 - Only one player has surpassed Garry Kasparob in peak ELO rating, Magnus Carlsen.
+- idke, ryuk, aricin, and due to inactivity a players like vaxei, and bubbleman would also be here.
 
 **How many top players in 2023 have now surpassed the pp value of Cookiezi who was rank 1 in 2017?**
