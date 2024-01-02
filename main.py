@@ -7,8 +7,10 @@ def main():
     osu_2023_data = pd.read_csv('data/osu_2023_player_data.csv', index_col=False, delimiter=",")
     connection = database.create_connection_to_server("localhost", "jempio", pw)
     create_top_osu_player_db_query = "CREATE DATABASE top_osu_player"
+
     database.create_database(connection, create_top_osu_player_db_query)
     connection = database.create_connection_to_db("localhost", "jempio", pw, "top_osu_player")
+
     database.populate_2017_player_data(connection, osu_2017_data)
     database.populate_2023_player_data(connection, osu_2023_data)
 
@@ -45,15 +47,15 @@ def main():
     SELECT player_name, play_count, hours FROM osu_2017_data
     """
     play_time_results_2017 = database.results_query(connection, play_time_query_2017)
-    pd_visualizer(play_time_results_2017, ["player name", "playcount","hours"])
+    pd_visualizer(play_time_results_2017, ["player name", "playcount", "hours"])
     
     avg_play_time_query_2017 = """
     SELECT AVG(play_count), AVG(hours) FROM osu_2017_data
     """
     avg_play_time_results_2017 = database.results_query(connection, avg_play_time_query_2017)
-    pd_visualizer(avg_play_time_results_2017, ["avg playcount in 2017", "avg hours played in 2017"])
+    pd_visualizer(avg_play_time_results_2017, ["avg playcount in 2017", "     avg hours played in 2017"])
 
-    # # Query for avg playcount and playtime in 2023
+    # Query for avg playcount and playtime in 2023
     play_time_query_2023 = """
     SELECT player_name, play_count, hours FROM osu_2023_data
     """
@@ -65,6 +67,32 @@ def main():
     """
     avg_play_time_results_2023 = database.results_query(connection, avg_play_time_query_2023)
     pd_visualizer(avg_play_time_results_2023, ["avg playcount in 2023", "     avg hours played in 2023"])
+
+    # Q3
+    # Query for varying country representation in 2017
+    country_query_2017 = """
+    SELECT country, COUNT(*) from osu_2017_data
+    GROUP BY country
+    ORDER BY COUNT(*) desc
+    LIMIT 10;
+    """
+    country_results_2017 = database.results_query(connection, country_query_2017)
+    pd_visualizer(country_results_2017, ["country", "number of players"])
+
+    # Query for varying country representation in 2023
+    country_query_2023 = """
+    SELECT country, COUNT(*) from osu_2023_data
+    GROUP BY country
+    ORDER BY COUNT(*) desc
+    LIMIT 10;
+    """
+    country_results_2023 = database.results_query(connection, country_query_2023)
+    pd_visualizer(country_results_2023, ["country", "number of players"])
+    
+    
+
+
+    
 
 
 def pd_visualizer(results, columns):
