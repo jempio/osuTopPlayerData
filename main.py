@@ -3,7 +3,7 @@ import pandas as pd
 
 def main():
     # hidden password
-    pw = "-Chubbynuts7757"
+    pw = ""
     osu_2017_data = pd.read_csv('data/osu_2017_player_data.csv', index_col=False, delimiter=",")
     osu_2023_data = pd.read_csv('data/osu_2023_player_data.csv', index_col=False, delimiter=",")
     connection = database.create_connection_to_server("localhost", "jempio", pw)
@@ -24,7 +24,7 @@ def main():
     pd_visualizer(pp_results_2017, ["player name","performance points"])
     
     avg_pp_query_2017 = """
-    SELECT AVG(performance_points) FROM osu_2017_data
+    SELECT ROUND(AVG(performance_points)) FROM osu_2017_data
     """
     avg_pp_query_2017 = database.results_query(connection, avg_pp_query_2017)
     pd_visualizer(avg_pp_query_2017, ["total pp average in 2017"])
@@ -37,7 +37,7 @@ def main():
     pd_visualizer(pp_results_2023, ["player name","performance points"])
     
     avg_pp_query_2023 = """
-    SELECT AVG(performance_points) FROM osu_2023_data
+    SELECT ROUND(AVG(performance_points)) FROM osu_2023_data
     """
     avg_pp_query_2023 = database.results_query(connection, avg_pp_query_2023)
     pd_visualizer(avg_pp_query_2023, ["total pp average in 2023"])
@@ -51,7 +51,7 @@ def main():
     pd_visualizer(play_time_results_2017, ["player name", "playcount", "hours"])
     
     avg_play_time_query_2017 = """
-    SELECT AVG(play_count), AVG(hours) FROM osu_2017_data
+    SELECT ROUND(AVG(play_count)), ROUND(AVG(hours)) FROM osu_2017_data
     """
     avg_play_time_results_2017 = database.results_query(connection, avg_play_time_query_2017)
     pd_visualizer(avg_play_time_results_2017, ["avg playcount in 2017", "     avg hours played in 2017"])
@@ -64,7 +64,7 @@ def main():
     pd_visualizer(play_time_results_2023, ["player name", "playcount","hours"])
     
     avg_play_time_query_2023 = """
-    SELECT AVG(play_count), AVG(hours) FROM osu_2023_data
+    SELECT ROUND(AVG(play_count)), ROUND(AVG(hours)) FROM osu_2023_data
     """
     avg_play_time_results_2023 = database.results_query(connection, avg_play_time_query_2023)
     pd_visualizer(avg_play_time_results_2023, ["avg playcount in 2023", "     avg hours played in 2023"])
@@ -166,13 +166,7 @@ def main():
     """
     result_passed_cookiezi = database.results_query(connection, passed_cookiezi_query)
     pd_visualizer(result_passed_cookiezi, ["player name", "performance points"])
-
     
-    
-
-
-    
-
 
 def pd_visualizer(results, columns):
     db_results = []
