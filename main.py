@@ -144,8 +144,30 @@ def main():
     top_player_results = database.results_query(connection, remained_as_top_player_query)
     pd_visualizer(top_player_results, ["player name"])
 
+    # Q6
+    # Query to see how many players have passed Cookiezi in pp value in 2017, and how much he has gained since?
+    cookiezi_query = """
+    SELECT osu_2017_data.player_name, osu_2017_data.performance_points AS performance_points, 
+    osu_2023_data.performance_points AS performance_points
+    FROM osu_2017_data
+    INNER JOIN osu_2023_data ON osu_2017_data.player_name = osu_2023_data.player_name
+    WHERE osu_2017_data.player_name = "Cookiezi"; 
+    """
+    result_cookiezi = database.results_query(connection, cookiezi_query)
+    pd_visualizer(result_cookiezi, ["player name", "performance points (2017)", 'peformance points (2023)'])
     
 
+    passed_cookiezi_query = """
+    SELECT osu_2023_data.player_name, osu_2023_data.performance_points
+    FROM osu_2023_data
+    INNER JOIN osu_2017_data 
+        ON osu_2023_data.performance_points > osu_2017_data.performance_points
+    WHERE osu_2017_data.player_name = "Cookiezi"
+    """
+    result_passed_cookiezi = database.results_query(connection, passed_cookiezi_query)
+    pd_visualizer(result_passed_cookiezi, ["player name", "performance points"])
+
+    
     
 
 
